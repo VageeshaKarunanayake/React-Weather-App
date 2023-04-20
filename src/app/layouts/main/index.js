@@ -3,20 +3,12 @@ import "./../../App.css";
 import { Box, Container } from "@mui/material";
 import Header from "./../header/index";
 import Footer from "./../footer/index";
+import { Styles } from "./styles";
 import BackgroundImage from "./../../assets/images/Background.png";
 
 const Content = (props) => {
   return (
-    <Box
-      sx={{
-        minHeight: "85vh",
-        height: "auto",
-        padding: "20px",
-        backgroundColor: "#1e2027",
-        backgroundImage: `url(${BackgroundImage})`,
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <Box sx={[{ backgroundImage: `url(${BackgroundImage})` }, Styles.MainBox]}>
       {props.children}
     </Box>
   );

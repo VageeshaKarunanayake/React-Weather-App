@@ -7,8 +7,13 @@ import { useNavigate } from "react-router-dom";
 import LocationImage from "./../../assets/images/Location.png";
 import { useLocation } from "react-router-dom";
 import DefaultLayout from "./../../layouts/main";
-import { dateTimeConverter, timeConverter } from "./../../common/global/index";
+import {
+  DateTimeConverter,
+  TimeConverter,
+  RoundInteger,
+} from "./../../common/global/functions/index";
 import { AppContext } from "./../../common/context/index";
+import { Styles } from "./styles";
 
 const WeatherDetailCard = (props) => {
   const navigate = useNavigate();
@@ -18,25 +23,19 @@ const WeatherDetailCard = (props) => {
       onClick={() => {
         navigate("/");
       }}
-      sx={{
-        maxWidth: "md",
-        margin: "auto",
-        borderRadius: "10px",
-        backgroundColor: `${cityWeatherDetails[props.id].colour}`,
-      }}
+      sx={[
+        { backgroundColor: `${cityWeatherDetails[props.id].colour}` },
+        Styles.ViewWeatherCard,
+      ]}
     >
       <IconButton aria-label="arrowBack" size="large">
-        <ArrowBackIcon
-          sx={{
-            color: "white",
-          }}
-        />
+        <ArrowBackIcon sx={Styles.ViewWeatherArrowBackIcon} />
       </IconButton>
       <CardContent
-        sx={{
-          minHeight: "260px",
-          backgroundColor: `${cityWeatherDetails[props.id].colour}`,
-        }}
+        sx={[
+          { backgroundColor: `${cityWeatherDetails[props.id].colour}` },
+          Styles.ViewWeatherFirstCardContent,
+        ]}
       >
         <Typography
           gutterBottom
@@ -44,16 +43,16 @@ const WeatherDetailCard = (props) => {
           component="div"
           color={"white"}
           align="center"
-          sx={{ fontWeight: "bold" }}
+          sx={Styles.ViewWeatherFirstTypography}
         >
           {cityWeatherDetails[props.id].cityName},{" "}
           {cityWeatherDetails[props.id].country}
         </Typography>
         <Typography variant="body1" color={"white"} align="center">
-          {dateTimeConverter(cityWeatherDetails[props.id].dt)}
+          {DateTimeConverter(cityWeatherDetails[props.id].dt)}
         </Typography>
-        <Grid container sx={{ alignItems: "center", paddingTop: "40px" }}>
-          <Grid item xs={6} sx={{ textAlign: "center", paddingLeft: "180px" }}>
+        <Grid container sx={Styles.ViewWeatherFirstGridContainer}>
+          <Grid item xs={6} sx={Styles.ViewWeatherFirstGridItem}>
             <Grid item>
               <img
                 src={`https://openweathermap.org/img/wn/${
@@ -69,27 +68,22 @@ const WeatherDetailCard = (props) => {
             </Typography>
           </Grid>
           <Divider orientation="vertical" flexItem color={"white"}></Divider>
-          <Grid item xs={5} sx={{ textAlign: "start", paddingLeft: "60px" }}>
+          <Grid item xs={5} sx={Styles.ViewWeatherThirdGridItem}>
             <Typography variant="h3" color={"white"}>
-              {Math.round(cityWeatherDetails[props.id].temp)}ºc
+              {RoundInteger(cityWeatherDetails[props.id].temp)}ºc
             </Typography>
             <Typography variant="body1" color={"white"} paddingTop="10px">
-              Temp Min: {Math.round(cityWeatherDetails[props.id].minTemp)}ºc
+              Temp Min: {RoundInteger(cityWeatherDetails[props.id].minTemp)}ºc
             </Typography>
             <Typography variant="body1" color={"white"} paddingTop="10px">
-              Temp Max: {Math.round(cityWeatherDetails[props.id].maxTemp)}ºc
+              Temp Max: {RoundInteger(cityWeatherDetails[props.id].maxTemp)}ºc
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
-      <CardContent
-        sx={{
-          minHeight: "100px",
-          backgroundColor: "#30333d",
-        }}
-      >
-        <Grid container sx={{ alignItems: "center", paddingTop: "10px" }}>
-          <Grid item xs={4} sx={{ textAlign: "left", paddingLeft: "60px" }}>
+      <CardContent sx={Styles.ViewWeatherSecondCardContent}>
+        <Grid container sx={Styles.ViewWeatherSecondGridContainer}>
+          <Grid item xs={4} sx={Styles.ViewWeatherFourthGridItem}>
             <Typography variant="body1" color={"white"}>
               Pressure: {cityWeatherDetails[props.id].pressure}Pa
             </Typography>
@@ -97,11 +91,11 @@ const WeatherDetailCard = (props) => {
               Humidity: {cityWeatherDetails[props.id].humidity}%
             </Typography>
             <Typography variant="body1" color={"white"}>
-              Visibility: {cityWeatherDetails[props.id].visibility / 1000}km
+              Visibility: {cityWeatherDetails[props.id].visibility}km
             </Typography>
           </Grid>
           <Divider orientation="vertical" flexItem color={"white"}></Divider>
-          <Grid item xs={4} sx={{ textAlign: "center" }}>
+          <Grid item xs={4} sx={Styles.ViewWeatherFifthGridItem}>
             <img
               src={LocationImage}
               alt="Location"
@@ -114,12 +108,12 @@ const WeatherDetailCard = (props) => {
             </Typography>
           </Grid>
           <Divider orientation="vertical" flexItem color={"white"}></Divider>
-          <Grid item xs={3} sx={{ textAlign: "center", paddingLeft: "60px" }}>
+          <Grid item xs={3} sx={Styles.ViewWeatherFourthGridItem}>
             <Typography variant="body1" color={"white"}>
-              Sunrise: {timeConverter(cityWeatherDetails[props.id].sunrise)}
+              Sunrise: {TimeConverter(cityWeatherDetails[props.id].sunrise)}
             </Typography>
             <Typography variant="body1" color={"white"}>
-              Sunset: {timeConverter(cityWeatherDetails[props.id].sunset)}
+              Sunset: {TimeConverter(cityWeatherDetails[props.id].sunset)}
             </Typography>
           </Grid>
         </Grid>
@@ -128,7 +122,7 @@ const WeatherDetailCard = (props) => {
   );
 };
 
-const ViewWeather = ({ route, navigate }) => {
+const ViewWeather = () => {
   const location = useLocation();
   return (
     <>

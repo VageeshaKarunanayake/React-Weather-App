@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Dashboard from "./pages/dashboard/index";
 import ViewWeather from "./pages/view-weather/index";
 import { AppContext } from "./common/context/index";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GetWeather from "./common/api/index";
+import GetWeather from "./common/apis/index";
 
 const App = () => {
   const [cityWeatherDetails, setCityWeatherDetails] = useState([]);
@@ -34,7 +34,6 @@ const App = () => {
 
   useEffect(() => {
     GetWeather(dispatchUserEvent);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

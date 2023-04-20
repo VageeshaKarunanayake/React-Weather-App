@@ -1,24 +1,4 @@
-export const colourPicker = [
-  { id: 0, colour: "#388ee7" },
-
-  { id: 1, colour: "#6249cc" },
-
-  { id: 2, colour: "#40b681" },
-
-  { id: 3, colour: "#de944e" },
-
-  { id: 4, colour: "#9c3a3a" },
-
-  { id: 5, colour: "#388ee7" },
-
-  { id: 6, colour: "#6249cc" },
-
-  { id: 7, colour: "#40b681" },
-];
-
-export var citiesData = require("./../../assets/files/cities.json");
-
-export const dateTimeConverter = (UNIX_timestamp) => {
+export const DateTimeConverter = (UNIX_timestamp) => {
   var a = new Date(UNIX_timestamp * 1000);
   var months = [
     "Jan",
@@ -64,7 +44,7 @@ export const dateTimeConverter = (UNIX_timestamp) => {
   return time;
 };
 
-export const timeConverter = (UNIX_timestamp) => {
+export const TimeConverter = (UNIX_timestamp) => {
   var a = new Date(UNIX_timestamp * 1000);
   var h = a.getHours();
   var hour = h;
@@ -85,4 +65,8 @@ export const timeConverter = (UNIX_timestamp) => {
   var time =
     String(hour).padStart(2, "0") + ":" + String(min).padStart(2, "0") + ampm;
   return time;
+};
+
+export const RoundInteger = (value) => {
+  return Math.round(value);
 };
