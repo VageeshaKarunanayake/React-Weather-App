@@ -1,5 +1,10 @@
 import "./../../App.css";
-import { citiesData, colourPicker, cacheName } from "../global/variables/index";
+import { citiesData, colourPicker, cacheName } from "../global/constants/index";
+import {
+  DateTimeConverter,
+  RoundInteger,
+  TimeConverter,
+} from "../global/functions/index";
 
 const GetHttpResponse = async (city) => {
   const url = `http://api.openweathermap.org/data/2.5/weather?id=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
@@ -46,10 +51,8 @@ const getAllCacheData = async (cacheName, url) => {
       } else {
         cacheStorage.delete(url);
       }
-      console.log("Elapsed Time " + timeElapsed);
     }
   }
-
   return data;
 };
 
@@ -61,21 +64,19 @@ const GetWeather = async (dispatchUserEvent) => {
     if (data) {
       const cityWeatherDetailObject = {
         cityId: city,
-        cityName: data.name,
-        country: data.sys.country,
-        dt: data.dt,
+        cityNameAndCountry: `${data.name} ${data.sys.country}`,
+        dt: DateTimeConverter(data.dt),
         description: data.weather[0].description,
         icon: data.weather[0].icon,
-        temp: data.main.temp,
-        minTemp: data.main.temp_min,
-        maxTemp: data.main.temp_max,
-        pressure: data.main.pressure,
-        humidity: data.main.humidity,
-        visibility: data.visibility / 1000,
-        windSpeed: data.wind.speed,
-        windDegree: data.wind.deg,
-        sunrise: data.sys.sunrise,
-        sunset: data.sys.sunset,
+        temp: `${RoundInteger(data.main.temp)}ºc`,
+        minTemp: `Temp Min: ${RoundInteger(data.main.temp_min)}ºc`,
+        maxTemp: `Temp Max: ${RoundInteger(data.main.temp_max)}ºc`,
+        pressure: ` ${data.main.pressure}Pa`,
+        humidity: ` ${data.main.humidity}%`,
+        visibility: ` ${data.visibility / 1000}km`,
+        windDetails: `${data.wind.speed}m/s ${data.wind.deg} Degree`,
+        sunrise: ` ${TimeConverter(data.sys.sunrise)}`,
+        sunset: ` ${TimeConverter(data.sys.sunset)}`,
         colour: colourPicker[index].colour,
       };
       dispatchUserEvent("ADD_CITY_WEATHER", {

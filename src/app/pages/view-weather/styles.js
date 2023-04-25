@@ -13,23 +13,24 @@ export const Styles = {
     minHeight: "260px",
   },
 
-  ViewWeatherFirstTypography: {
-    fontWeight: "bold",
-  },
-
   ViewWeatherFirstGridContainer: {
     alignItems: "center",
     paddingTop: "40px",
   },
 
+  ViewWeatherSecondGridContainer: {
+    justifyContent: "flex-end",
+    paddingRight: "40px",
+  },
+
   ViewWeatherFirstGridItem: {
     textAlign: "center",
-    paddingLeft: "120px",
+    alignItems: "center",
   },
 
   ViewWeatherThirdGridItem: {
     textAlign: "start",
-    paddingLeft: "70px",
+    paddingLeft: "60px",
   },
 
   ViewWeatherSecondCardContent: {
@@ -37,7 +38,7 @@ export const Styles = {
     backgroundColor: "#30333d",
   },
 
-  ViewWeatherSecondGridContainer: {
+  ViewWeatherThirdGridContainer: {
     alignItems: "center",
     paddingTop: "10px",
   },
