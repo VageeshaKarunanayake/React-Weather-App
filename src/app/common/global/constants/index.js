@@ -16,8 +16,6 @@ export const colourPicker = [
   { id: 7, colour: "#40b681" },
 ];
 
-export const citiesData = require("./../../../assets/files/cities.json");
-
-export const url = "http://api.openweathermap.org/data/2.5/weather?id=";
+export const citiesData = require("../../../assets/files/cities.json");
 
 export const cacheName = "weatherApiResponse";

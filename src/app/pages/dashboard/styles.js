@@ -28,10 +28,6 @@ export const Styles = {
     paddingRight: "30px",
   },
 
-  DashboardFirstTypography: {
-    fontWeight: "bold",
-  },
-
   DashboardSixthGridItem: {
     textAlign: "start",
     paddingLeft: "60px",

@@ -11,16 +11,17 @@ import {
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
-import LocationImage from "./../../assets/images/Location.png";
 import DashboardCardBackgroundImage from "./../../assets/images/DashboardCardBackground.png";
 import DefaultLayout from "./../../layouts/main";
 import Search from "./../../layouts/search";
+import { AppContext } from "./../../common/context";
 import {
-  TimeConverter,
-  DateTimeConverter,
-  RoundInteger,
-} from "./../../common/global/functions/index";
-import { AppContext } from "./../../common/context/index";
+  CardFooterLeftText,
+  CardFooterCenter,
+  CardFooterRightText,
+  CardContentLeftUpper,
+  CardContentRight,
+} from "./../../layouts/weather-card-details";
 import { Styles } from "./styles";
 
 const WeatherInfoCard = () => {
@@ -69,19 +70,12 @@ const WeatherInfoCard = () => {
               >
                 <Grid container sx={Styles.DashboardSecondGridContainer}>
                   <Grid item xs={6} sx={Styles.DashboardThirdGridItem}>
-                    <Typography
-                      gutterBottom
-                      variant="h6"
-                      component="div"
-                      color={"white"}
-                      align="center"
-                      sx={Styles.DashboardFirstTypography}
-                    >
-                      {item.cityName}, {item.country}
-                    </Typography>
-                    <Typography variant="body2" color={"white"} align="center">
-                      {DateTimeConverter(item.dt)}
-                    </Typography>
+                    <CardContentLeftUpper
+                      cityNameAndCountry={item.cityNameAndCountry}
+                      dt={item.dt}
+                      firstVarient="h6"
+                      secondVarient="body2"
+                    />
                     <Grid container spacing={1} paddingTop={"20px"}>
                       <Grid item xs={4.5} textAlign={"end"}>
                         <img
@@ -113,38 +107,25 @@ const WeatherInfoCard = () => {
                     color={"white"}
                   ></Divider>
                   <Grid item xs={5} sx={Styles.DashboardSixthGridItem}>
-                    <Typography
-                      variant="h4"
-                      color={"white"}
-                      marginLeft={"20px"}
-                    >
-                      {RoundInteger(item.temp)}ºc
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color={"white"}
-                      paddingTop="10px"
-                    >
-                      Temp Min: {RoundInteger(item.minTemp)}ºc
-                    </Typography>
-                    <Typography variant="body2" color={"white"}>
-                      Temp Max: {RoundInteger(item.maxTemp)}ºc
-                    </Typography>
+                    <CardContentRight
+                      firstVarient="h4"
+                      secondVarient="body2"
+                      temp={item.temp}
+                      minTemp={item.minTemp}
+                      maxTemp={item.maxTemp}
+                    />
                   </Grid>
                 </Grid>
               </CardContent>
               <CardContent sx={Styles.DashboardSecondCardContent}>
                 <Grid container sx={Styles.DashboardThirdGridContainer}>
                   <Grid item xs={4} sx={Styles.DashboardSeventhGridItem}>
-                    <Typography variant="body2" color={"white"}>
-                      Pressure: {item.pressure}Pa
-                    </Typography>
-                    <Typography variant="body2" color={"white"}>
-                      Humidity: {item.humidity}%
-                    </Typography>
-                    <Typography variant="body2" color={"white"}>
-                      Visibility: {item.visibility}km
-                    </Typography>
+                    <CardFooterLeftText
+                      pressure={item.pressure}
+                      humidity={item.humidity}
+                      visibility={item.visibility}
+                      typographyVarient="body2"
+                    />
                   </Grid>
                   <Divider
                     orientation="vertical"
@@ -152,28 +133,24 @@ const WeatherInfoCard = () => {
                     color={"white"}
                   ></Divider>
                   <Grid item xs={4} sx={Styles.DashboardEighthGridItem}>
-                    <img
-                      src={LocationImage}
-                      alt="Location"
-                      height="15px"
-                      width="15px"
+                    <CardFooterCenter
+                      windDetails={item.windDetails}
+                      imageHeight="15px"
+                      imageWidth="15px"
+                      typographyVarient="body2"
                     />
-                    <Typography variant="body2" color={"white"}>
-                      {item.windSpeed}m/s {item.windDegree} Degree
-                    </Typography>
                   </Grid>
                   <Divider
                     orientation="vertical"
                     flexItem
                     color={"white"}
                   ></Divider>
-                  <Grid item xs={3} sx={Styles.DashboardNinethGridItem}>
-                    <Typography variant="body2" color={"white"}>
-                      Sunrise: {TimeConverter(item.sunrise)}
-                    </Typography>
-                    <Typography variant="body2" color={"white"}>
-                      Sunset: {TimeConverter(item.sunset)}
-                    </Typography>
+                  <Grid item xs={3.5} sx={Styles.DashboardNinethGridItem}>
+                    <CardFooterRightText
+                      sunrise={item.sunrise}
+                      sunset={item.sunset}
+                      typographyVarient="body2"
+                    />
                   </Grid>
                 </Grid>
               </CardContent>
