@@ -70,3 +70,10 @@ export const TimeConverter = (UNIX_timestamp) => {
 export const RoundInteger = (value) => {
   return Math.round(value);
 };
+
+export const DashboardRemoveCity = (event, dispatchUserEvent, cityId) => {
+  event.stopPropagation();
+  dispatchUserEvent("REMOVE_CITY_WEATHER", {
+    cityId: cityId,
+  });
+};

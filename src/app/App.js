@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Dashboard from "./pages/dashboard/index";
-import ViewWeather from "./pages/view-weather/index";
-import { AppContext } from "./common/context/index";
+import Dashboard from "./pages/dashboard";
+import ViewWeather from "./pages/view-weather";
+import { AppContext } from "./common/context";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GetWeather from "./common/apis/index";
+import GetWeather from "./common/apis";
 
 const App = () => {
   const [cityWeatherDetails, setCityWeatherDetails] = useState([]);

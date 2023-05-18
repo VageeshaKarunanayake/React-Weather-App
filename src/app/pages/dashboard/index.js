@@ -13,7 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import DashboardCardBackgroundImage from "./../../assets/images/DashboardCardBackground.png";
 import DefaultLayout from "./../../layouts/main";
-import Search from "./../../layouts/search";
+import Search from "../../components/search";
 import { AppContext } from "./../../common/context";
 import {
   CardFooterLeftText,
@@ -21,8 +21,9 @@ import {
   CardFooterRightText,
   CardContentLeftUpper,
   CardContentRight,
-} from "./../../layouts/weather-card-details";
+} from "../../components/weather-card-details";
 import { Styles } from "./styles";
+import { DashboardRemoveCity } from "./../../common/global/functions";
 
 const WeatherInfoCard = () => {
   const navigate = useNavigate();
@@ -51,10 +52,7 @@ const WeatherInfoCard = () => {
                 aria-label="arrowBack"
                 size="small"
                 onClick={(event) => {
-                  event.stopPropagation();
-                  dispatchUserEvent("REMOVE_CITY_WEATHER", {
-                    cityId: item.cityId,
-                  });
+                  DashboardRemoveCity(event, dispatchUserEvent, item.cityId);
                 }}
               >
                 <CloseIcon sx={Styles.DashboardCardCloseIcon} />
@@ -93,8 +91,8 @@ const WeatherInfoCard = () => {
                       >
                         <Typography
                           variant="body2"
-                          color={"white"}
                           paddingTop={"15px"}
+                          sx={Styles.ColourWhite}
                         >
                           {item.description}
                         </Typography>
@@ -104,7 +102,7 @@ const WeatherInfoCard = () => {
                   <Divider
                     orientation="vertical"
                     flexItem
-                    color={"white"}
+                    sx={Styles.BackgroundColourWhite}
                   ></Divider>
                   <Grid item xs={5} sx={Styles.DashboardSixthGridItem}>
                     <CardContentRight
@@ -130,7 +128,7 @@ const WeatherInfoCard = () => {
                   <Divider
                     orientation="vertical"
                     flexItem
-                    color={"white"}
+                    sx={Styles.BackgroundColourWhite}
                   ></Divider>
                   <Grid item xs={4} sx={Styles.DashboardEighthGridItem}>
                     <CardFooterCenter
@@ -143,7 +141,7 @@ const WeatherInfoCard = () => {
                   <Divider
                     orientation="vertical"
                     flexItem
-                    color={"white"}
+                    sx={Styles.BackgroundColourWhite}
                   ></Divider>
                   <Grid item xs={3.5} sx={Styles.DashboardNinethGridItem}>
                     <CardFooterRightText

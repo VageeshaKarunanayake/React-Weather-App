@@ -41,14 +41,26 @@ export const Styles = {
   ViewWeatherThirdGridContainer: {
     alignItems: "center",
     paddingTop: "10px",
+    justifyContent: "center",
   },
 
   ViewWeatherFourthGridItem: {
     textAlign: "left",
-    paddingLeft: "60px",
   },
 
   ViewWeatherFifthGridItem: {
     textAlign: "center",
+  },
+
+  ColourWhite: {
+    color: "white",
+  },
+
+  BackgroundColourWhite: {
+    backgroundColor: "white",
+  },
+
+  ViewWeatherFourthGridContainer: {
+    justifyContent: "end",
   },
 };

@@ -6,15 +6,18 @@ import { Styles } from "./styles";
 const Search = () => {
   return (
     <>
-      <Grid container textAlign={"center"}>
-        <Grid item xs={12}>
+      <Grid container justifyContent={"center"}>
+        <Grid item xs={6} md={3}>
           <TextField
             hiddenLabel
             placeholder="Enter a city"
             variant="filled"
             size="small"
+            fullWidth={true}
             sx={Styles.SearchGridItem}
           />
+        </Grid>
+        <Grid item xs={12} md={"auto"} textAlign={"center"}>
           <Button
             variant="contained"
             onClick={() => {

@@ -1,26 +1,26 @@
 import "./../../App.css";
-import { citiesData, colourPicker, cacheName } from "../global/constants/index";
+import { citiesData, colourPicker, cacheName } from "../global/constants";
 import {
   DateTimeConverter,
   RoundInteger,
   TimeConverter,
-} from "../global/functions/index";
+} from "../global/functions";
 
 const GetHttpResponse = async (city) => {
   const url = `http://api.openweathermap.org/data/2.5/weather?id=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
-  const cacheResponse = await getAllCacheData(cacheName, url);
+  const cacheResponse = await GetAllCacheData(cacheName, url);
 
   if (cacheResponse) {
     return cacheResponse;
   } else {
     const api_call = await fetch(url);
     const response = await api_call.json();
-    addDataIntoCache(cacheName, url, response);
+    AddDataIntoCache(cacheName, url, response);
     return response;
   }
 };
 
-const addDataIntoCache = (cacheName, url, response) => {
+const AddDataIntoCache = (cacheName, url, response) => {
   const newHeaders = new Headers();
   newHeaders.set("cached_time", Date.now());
 
@@ -35,22 +35,20 @@ const addDataIntoCache = (cacheName, url, response) => {
   }
 };
 
-const getAllCacheData = async (cacheName, url) => {
-  var names = await caches.keys();
+const GetAllCacheData = async (cacheName, url) => {
+  var names = new Map([await caches.keys()]);
   var data = null;
 
-  for (const name of names) {
-    if (name === cacheName) {
-      const cacheStorage = await caches.open(name);
-      const cachedResponse = await cacheStorage.match(url);
-      const cachedTime = cachedResponse.headers.get("cached_time");
-      const timeElapsed = Math.round((Date.now() - cachedTime) / 60000);
+  if (names.has(cacheName)) {
+    const cacheStorage = await caches.open(cacheName);
+    const cachedResponse = await cacheStorage.match(url);
+    const cachedTime = cachedResponse.headers.get("cached_time");
+    const timeElapsed = Math.round((Date.now() - cachedTime) / 60000);
 
-      if (timeElapsed < 5) {
-        data = await cachedResponse.json();
-      } else {
-        cacheStorage.delete(url);
-      }
+    if (timeElapsed < 5) {
+      data = await cachedResponse.json();
+    } else {
+      cacheStorage.delete(url);
     }
   }
   return data;
