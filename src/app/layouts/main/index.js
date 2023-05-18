@@ -1,8 +1,8 @@
 import React from "react";
 import "./../../App.css";
 import { Box, Container } from "@mui/material";
-import Header from "./../header/index";
-import Footer from "./../footer/index";
+import Header from "./../header";
+import Footer from "./../footer";
 import { Styles } from "./styles";
 import BackgroundImage from "./../../assets/images/Background.png";
 

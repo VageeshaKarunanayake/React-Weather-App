@@ -56,4 +56,12 @@ export const Styles = {
     textAlign: "left",
     paddingLeft: "6px",
   },
+
+  ColourWhite: {
+    color: "white",
+  },
+
+  BackgroundColourWhite: {
+    backgroundColor: "white",
+  },
 };

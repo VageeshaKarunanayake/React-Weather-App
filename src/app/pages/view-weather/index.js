@@ -12,7 +12,7 @@ import {
   CardFooterRightText,
   CardContentLeftUpper,
   CardContentRight,
-} from "./../../layouts/weather-card-details";
+} from "./../../components/weather-card-details";
 import { AppContext } from "./../../common/context";
 import { Styles } from "./styles";
 
@@ -62,13 +62,17 @@ const WeatherDetailCard = (props) => {
                     width="80px"
                   />
                 </Grid>
-                <Typography variant="body1" color={"white"}>
+                <Typography variant="body1" sx={Styles.ColourWhite}>
                   {cityWeatherDetails[props.id].description}
                 </Typography>
               </Grid>
             </Grid>
           </Grid>
-          <Divider orientation="vertical" flexItem color={"white"}></Divider>
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={Styles.BackgroundColourWhite}
+          ></Divider>
           <Grid item xs={5} sx={Styles.ViewWeatherThirdGridItem}>
             <CardContentRight
               firstVarient="h3"
@@ -82,15 +86,21 @@ const WeatherDetailCard = (props) => {
       </CardContent>
       <CardContent sx={Styles.ViewWeatherSecondCardContent}>
         <Grid container sx={Styles.ViewWeatherThirdGridContainer}>
-          <Grid item xs={4} sx={Styles.ViewWeatherFourthGridItem}>
-            <CardFooterLeftText
-              pressure={cityWeatherDetails[props.id].pressure}
-              humidity={cityWeatherDetails[props.id].humidity}
-              visibility={cityWeatherDetails[props.id].visibility}
-              typographyVarient="body1"
-            />
+          <Grid item xs={3.4}>
+            <Grid item xs={8} sx={Styles.ViewWeatherFourthGridItem}>
+              <CardFooterLeftText
+                pressure={cityWeatherDetails[props.id].pressure}
+                humidity={cityWeatherDetails[props.id].humidity}
+                visibility={cityWeatherDetails[props.id].visibility}
+                typographyVarient="body1"
+              />
+            </Grid>
           </Grid>
-          <Divider orientation="vertical" flexItem color={"white"}></Divider>
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={Styles.BackgroundColourWhite}
+          ></Divider>
           <Grid item xs={4} sx={Styles.ViewWeatherFifthGridItem}>
             <CardFooterCenter
               windDetails={cityWeatherDetails[props.id].windDetails}
@@ -99,13 +109,19 @@ const WeatherDetailCard = (props) => {
               typographyVarient="body1"
             />
           </Grid>
-          <Divider orientation="vertical" flexItem color={"white"}></Divider>
-          <Grid item xs={3} sx={Styles.ViewWeatherFourthGridItem}>
-            <CardFooterRightText
-              sunrise={cityWeatherDetails[props.id].sunrise}
-              sunset={cityWeatherDetails[props.id].sunset}
-              typographyVarient="body1"
-            />
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={Styles.BackgroundColourWhite}
+          ></Divider>
+          <Grid container xs={3} sx={Styles.ViewWeatherFourthGridContainer}>
+            <Grid item xs={8} sx={Styles.ViewWeatherFourthGridItem}>
+              <CardFooterRightText
+                sunrise={cityWeatherDetails[props.id].sunrise}
+                sunset={cityWeatherDetails[props.id].sunset}
+                typographyVarient="body1"
+              />
+            </Grid>
           </Grid>
         </Grid>
       </CardContent>
